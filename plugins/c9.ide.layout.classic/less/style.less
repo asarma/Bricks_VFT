@@ -1,0 +1,198 @@
+.noscript{
+    display: none;
+}
+.strong{
+    font-weight : bold;
+}
+
+.cut.tree-row{
+    opacity : 0.5;
+}
+
+.relative {
+    position: relative;
+}
+
+.errorlabel{
+    position: absolute;
+    left: 350px;
+    right : 140px;
+    top: 0;
+    z-index: 10000;
+    text-align : center;
+    pointer-events: none;
+}
+.errorlabel.anim{
+    transition: top 0.2s;
+    -moz-transition: top 0.2s; /* Gecko */
+    -webkit-transition: top 0.2s; /* Safari */
+}
+.errorlabel div{
+    background: rgb(206, 56, 8);
+    padding: 7px 30px 7px 10px;
+    color: white;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5), 0 4px 4px -3px rgba(0,0,0,0.1) inset;
+    line-height: 1.4;
+    display : inline-block;
+    position : relative;
+    word-wrap: break-word;
+    max-width: 100%;
+    pointer-events: auto;
+}
+.errorlabel u.close{
+    background: url("@{image-path}/close_tab_btn.png") no-repeat 0 -14px;
+    width : 14px;
+    height : 14px;
+    position : absolute;
+    right : 8px;
+    top : 8px;
+    cursor : pointer;
+}
+.errorlabel u.close:hover{
+    background-position: -14px -14px;
+}
+.errorlabel u.close:active{
+    background-position: -28px -14px;
+}
+.errorlabel div span{
+    border-bottom : 1px dotted rgb(255, 174, 174);
+    cursor : help;
+}
+
+/**
+ * SERVICE SIGNIN BUTTONS
+ */
+
+.signin_options {
+    margin: 0;
+    text-align: right;
+}
+
+.github-signin {
+    width: 26px;
+    height: 24px;
+    background:url("@{image-path}/signin_github.png") no-repeat 0 0;
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    margin-left: 6px;
+    margin-top: -5px;
+    width: 26px;
+}
+
+.github-signin.btn-over {
+    background-position:0 -24px;
+}
+
+.bitbucket-signin {
+    width: 26px;
+    height: 24px;
+    background:url("@{image-path}/signin_bitbucket.png") no-repeat 0 0;
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    margin-left: 6px;
+    margin-top: -5px;
+    width: 26px;
+}
+
+.bitbucket-signin.btn-over {
+    background-position:0 -24px;
+}
+.facebook-signin {
+    width: 26px;
+    height: 24px;
+    background:url("@{image-path}/signin_facebook.png") no-repeat 0 0;
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    margin-left: 6px;
+    margin-top: -5px;
+    width: 26px;
+}
+
+.facebook-signin.btn-over {
+    background-position:0 -24px;
+}
+
+.google-signin {
+    width: 26px;
+    height: 24px;
+    background:url("@{image-path}/signin_google.png") no-repeat 0 0;
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    margin-left: 6px;
+    margin-top: -5px;
+    width: 26px;
+}
+
+.google-signin.btn-over {
+    background-position:0 -24px;
+}
+
+.twitter-signin {
+    width: 26px;
+    height: 24px;
+    background:url("@{image-path}/signin_twitter.png") no-repeat 0 0;
+
+    display: inline-block;
+    float: right;
+    height: 24px;
+    margin-left: 6px;
+    margin-top: -5px;
+    width: 26px;
+}
+
+.twitter-signin.btn-over {
+    background-position:0 -24px;
+}
+
+.view-mode-box {
+    background-color: #232e38;
+    color: #e9e9e9;
+    font-size: 13px;
+}
+.c9-logo-view-mode {
+    background:url("@{image-path}/logo-viewmode.png") no-repeat 0 0;
+    width: 210px;
+    height: 35px;
+}
+.blue-label {
+    color: #aec8de;
+}
+.green-label {
+    color: #d2f4c7;
+}
+.yellow-label {
+    color: #ffb017;
+}
+.white-label {
+    color: #e9f8fd;
+    font-size: 13px;
+}
+
+.nodecor-link {
+    text-decoration: none;
+}
+
+.needsignin {
+    font-size: 13px;
+}
+.rights-change {
+    font-size: 11px;
+    line-height: 15px;
+    text-align: center;
+}
+
+.alertMsg{
+    line-height : 1.3em;
+}
+.alertMsg a{
+    color : rgb(15, 114, 192);
+}

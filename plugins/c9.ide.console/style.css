@@ -1,0 +1,12 @@
+.console .editor_tab{
+    background: rgb(37, 37, 37);
+}
+
+.has_apf .console .btnsesssioncontainer .inside {
+    padding-right : 64px;
+    padding-left : 2px;
+}
+
+.console .btnsesssioncontainer .tabmenubtn {
+    display : none;
+}

@@ -1,0 +1,260 @@
+.bar-preferences > div{
+    font : 12px Arial;
+}
+
+/******* NAVIGATION ********/
+
+.bar-preferences .navigation{
+    padding : 15px 15px 0 15px;
+    border-right : 1px solid @preferences-nav-border-color;
+    
+    background: @preferences-nav-background;
+    .box-shadow(~"0 1px 0 0 @{preferences-nav-shadow-color} inset");
+}
+.bar-preferences .navigation a{
+    display : block;
+    color : @preferences-nav-link-color;
+    text-decoration : none;
+    margin-top : 2px;
+    padding: 3px 8px 3px 8px;
+    margin-left: -8px;
+    margin-right: 0;
+}
+.bar-preferences .navigation .level3 a:hover{
+    border-radius : 8px;
+    background : @preferences-nav-link-hover-background;
+    cursor : pointer;
+}
+.bar-preferences .navigation .current a{
+    color : @preferences-nav-link-active-color;
+}
+.bar-preferences .navigation .level1>blockquote {
+    padding-left : 10px;
+}
+.bar-preferences .navigation .level1>a {
+    font-weight: bold;
+    margin-left: 0;
+    margin-bottom: 13px;
+    margin-right: 0;
+    font-size: 10px;
+    color: @preferences-nav-main-color;
+    border-bottom: 1px dotted @preferences-nav-main-border-color;
+    padding-bottom: 5px;
+    padding-left: 0;
+    margin-top: -6px;
+    text-transform: uppercase;
+}
+.bar-preferences .navigation .level1:first-child>a {
+    margin-top: 0px;
+}
+.bar-preferences .navigation .level1>a:hover{
+    color : @preferences-nav-main-hover-color;
+    cursor : pointer;
+}
+.bar-preferences .navigation .level1.active>a:hover {
+    background : transparent;
+    cursor : default;
+}
+.bar-preferences .navigation .level1.active>a {
+    color: @preferences-nav-main-active-color;
+    border-bottom: 1px dotted @preferences-nav-main-active-border-color;
+}
+.bar-preferences .navigation .level2>span{
+    text-transform: uppercase;
+    color : @preferences-nav-sub-color;
+    font-size : 9px;
+    padding-bottom : 3px;
+    cursor : default;
+    display: block;
+}
+.bar-preferences .navigation blockquote{
+    padding : 0 0 10px 0;
+    margin : 0 0 15px 0;
+}
+.bar-preferences .navigation .level1>blockquote{
+    margin : 0 0 0 0;
+    padding-bottom : 0;
+    overflow : hidden;
+    position : relative;
+}
+.bar-preferences .navigation .level1>blockquote>:first-child{
+    /*border-top: 6px solid transparent;*/
+    margin-top : 6px;
+}
+.bar-preferences .navigation .level1>blockquote>:last-child{
+    margin-bottom : 10px;
+}
+.bar-preferences .navigation .level2>blockquote{
+    border-bottom : 1px dotted #666;
+}
+.bar-preferences .navigation .level2:last-child>blockquote{
+    border-bottom: 0;
+    margin-bottom: 5px;
+}
+.bar-preferences .navigation:last-child{
+    border-bottom : 0;
+}
+
+/******* FORM ********/
+
+.bar-preferences .container .header{
+    padding : 8px 15px 8px 15px;
+    font-size : 14px;
+    color : @preferences-header-color;
+    border-bottom : 1px solid @preferences-header-border-bottom-color;
+    background : @preferences-header-background;
+    border-top : 1px solid @preferences-header-border-top-color;
+}
+.bar-preferences .container .hsplitbox{
+    background : @preferences-background;
+    border-bottom : 1px solid @preferences-border-bottom-color;
+    border-top : 1px solid @preferences-border-top-color;
+}
+.bar-preferences .container .hsplitbox:last-child{
+    border-bottom: 1px solid @preferences-form-border-bottom-color;
+}
+.bar-preferences .label, .bar-preferences .cbcontainer span, .bar-preferences .cbblack.cbcontainer span{
+    color : @preferences-form-label-color;
+    font-size : 12px;
+    text-overflow : ellipsis;
+    .font-smoothing(@preferences-form-label-font-smoothing);
+}
+.bar-preferences .tbsimple{
+    background: @spinner-background;
+    border: 1px solid @spinner-border-color;
+    height: 15px;
+    color: @spinner-color;
+    padding: 3px;
+    .font-smoothing(true);
+}
+.bar-preferences .tbsimpleFocus{
+    border : 1px solid @spinner-focus-border-color;
+    box-shadow: @spinner-focus-box-shadow;
+}
+.bar-preferences .ta{
+    background: @spinner-background;
+    border: 1px solid @spinner-border-color;
+    padding: 5px;
+    color: @spinner-color;
+    .box-shadow(~"none");
+}
+.bar-preferences .taFocus{
+    border : 1px solid @spinner-focus-border-color;
+    box-shadow: @spinner-focus-box-shadow;
+}
+.bar-preferences .datagrid{
+    background : #484848;
+    border : 1px solid #232323;
+    color : #ccc;
+}
+.bar-preferences .datagridFocus{
+    border : 1px solid rgba(0,0,0,0.8);
+}
+.bar-preferences .lineselect div{
+    padding : 4px;
+    cursor : pointer;
+    color : #DDD;
+}
+.bar-preferences .lineselect .selected{
+    color : #5dadf4;
+}
+.bar-preferences .datagrid {
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.2);
+}
+.bar-preferences .datagrid .headings div u,
+.bar-preferences .datagrid .headings div,
+.bar-preferences .datagrid .records,
+.bar-preferences .datagrid .records .row span u,
+.bar-preferences .datagrid .records .selected, 
+.bar-preferences .datagrid .records .selected span{
+    border : 0;
+    background : transparent;
+    color : @preferences-form-label-color;
+}
+.bar-preferences .datagrid .records .row span u{
+    color : #ddd;
+}
+.bar-preferences .datagrid .headings{
+    background : rgba(0,0,0,0.3);
+    height     : 19px;
+    overflow   : hidden;
+}
+.bar-preferences .black_dropdown{
+    margin-top : -1px;
+}
+.bar-preferences .datagrid .records .row,
+.bar-preferences .datagrid .records .row span{
+    background : transparent;
+}
+.bar-preferences .datagrid .row:nth-child(4n-1){
+    background : rgba(255,255,255,0.05);
+}
+.bar-preferences .datagrid .row span.colsel{
+    background : rgba(0,0,0,0.15);
+}
+.bar-preferences .datagrid .records .selected{
+    background-color : #6c9700;
+}
+.bar-preferences .datagrid .records .selected span{
+    vertical-align : top;
+}
+.bar-preferences .datagrid .records .cbcontainer{
+    margin:-1px 0 0 0;
+}
+.bar-preferences .datagrid .records{
+    padding-top : 0;
+    top : 18px;
+    overflow-y : auto;
+}
+
+.bar-preferences .datagrid .tb_textbox{
+    margin   : 1px 0 0 0;
+    height   : 18px;
+    overflow : hidden;
+    top      : -1px;
+}
+.bar-preferences .datagrid .tb_textbox .sbtb_middle{
+    background : white;
+    padding : 0;
+    border : 0;
+    box-shadow : 0px 0px 10px 1px #232323 inset;
+}
+.bar-preferences .datagrid .tb_textbox .sbtb_middle input{
+    color : #333;
+    margin-top : -1px;
+    padding : 1px 0 0 4px;
+    font-family : Tahoma, Arial;
+    font-size : 8pt;
+}
+
+.bar-preferences .vsplitbox, .bar-preferences .hsplitbox{
+    position : relative;
+}
+
+.bar-preferences {
+    position         : relative;
+    overflow-y       : hidden;
+    overflow-x       : hidden;
+    /*background-image : url("@{image-path}/panelbg.png");*/
+    color            : #ddd;
+    font-family      : Tahoma, Arial;
+    font-size        : 12px;
+    /*text-shadow : rgba(255, 255, 255, 0.8) 0px 1px 0px;*/
+    text-shadow      : @preferences-text-shadow;
+    background       : @preferences-background;
+}
+.prefpanel{
+    background : @preferences-background;
+}
+.tab_console .bar-preferences{
+    margin-top : -1px;
+}
+
+.bar-preferences .header {
+}
+
+.bar-preferences .cbcontainer {
+}
+
+.bar-preferences .cbcontainer .checkbox {
+}

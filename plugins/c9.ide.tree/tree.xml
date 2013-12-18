@@ -1,0 +1,19 @@
+<a:application xmlns:a="http://ajax.org/2005/aml">
+    <a:vsplitbox id="winFilesViewer" splitter="true">
+        <a:bar id="winOpenfiles" skin="panel-bar" class="openfiles" height="10"></a:bar>
+
+        <a:bar id="winFileTree" skin="panel-bar" optimize="true">
+            <a:button id="btnTreeSettings"
+              skin="header-btn"
+              class="panel-settings" />
+
+            <a:menu id="mnuFilesSettings" />
+
+            <a:bar id="container" border="0" margin="0 0 0 0" class="filetree" focussable = "true" 
+                top="0" right="0" left="0" bottom="0" contextmenu="mnuCtxTree">
+            </a:bar>
+
+            <a:menu id="mnuCtxTree" />
+        </a:bar>
+    </a:vsplitbox>
+</a:application>

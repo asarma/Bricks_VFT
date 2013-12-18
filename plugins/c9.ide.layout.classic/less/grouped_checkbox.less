@@ -1,0 +1,92 @@
+.grouped_checkbox_holder {
+    .gradient(~"linear-gradient(top, @{button-black-background-1} 0%, @{button-black-background-2} 52%, @{button-black-background-3} 52%, @{button-black-background-4} 100%)");
+    .box-shadow(~"0px 1px @{border-highlight-strong}, inset 0px 1px @{border-highlight}");
+    
+    border: 1px solid @button-black-border-color;
+    border-radius: 3px;
+    height: 27px;
+    padding: 0;
+}
+.grouped_checkbox_holder .cbcontainer {
+    cursor: default;
+    display: inline-block;
+    height: 25px !important;
+    padding: 0;
+    width: 28px;
+}
+.grouped_checkbox_holder .cbcontainerOver,
+.grouped_checkbox_holder .cbcontainerFocus {
+    box-shadow: 0 0 0 1000px @button-black-hover-shadow inset;
+}
+
+.grouped_checkbox_holder .cbcontainer:after {
+    content: " ";
+    border-left: 1px solid @border-highlight-dark;
+    height: 21px;
+    float: right;
+    margin: 2px 0 0px 0;
+    box-shadow: 1px 0px @border-highlight-strong;
+}
+.grouped_checkbox_holder .cbcontainer:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.grouped_checkbox_holder .cbcontainer:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.grouped_checkbox_holder .cbcontainer:last-child:after,
+.grouped_checkbox_holder .cbcontainer.single:after{
+    display : none;
+}
+.grouped_checkbox_holder .cbcontainerDown,
+.grouped_checkbox_holder .cbcontainerChecked {
+    background: none;
+    box-shadow: -1px 0 0 0 @button-black-border-color, -1px 0 0 0 @button-black-border-color inset, @button-black-checked-shadow;
+}
+.grouped_checkbox_holder .cbcontainerDown:first-child,
+.grouped_checkbox_holder .cbcontainerChecked:first-child {
+    box-shadow: @button-black-checked-shadow;
+}
+.grouped_checkbox_holder .cbcontainerDown:last-child,
+.grouped_checkbox_holder .cbcontainerChecked:last-child {
+    box-shadow: -1px 0 0 0 @button-black-border-color, @button-black-checked-shadow;
+}
+.grouped_checkbox_holder .cbcontainer .checkbox {
+    background: url("@{image-path}/c9-repeat-x.png") no-repeat 50% 0;
+    border: 0;
+    height: 25px;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.grouped_checkbox_holder .chkRegEx .checkbox { background-position: @chkRegEx-icon; }
+.grouped_checkbox_holder .chkRegEx.cbcontainerChecked .checkbox { background-position: @chkRegEx-hover-icon; }
+.grouped_checkbox_holder .chkMatchCase .checkbox { background-position: @chkMatchCase-icon; }
+.grouped_checkbox_holder .chkMatchCase.cbcontainerChecked .checkbox { background-position: @chkMatchCase-hover-icon; }
+.grouped_checkbox_holder .chkWholeWords .checkbox { background-position: @chkWholeWords-icon; }
+.grouped_checkbox_holder .chkWholeWords.cbcontainerChecked .checkbox { background-position: @chkWholeWords-hover-icon; }
+.grouped_checkbox_holder .chkPreserveCase .checkbox { background-position: @chkPreserveCase-icon; }
+.grouped_checkbox_holder .chkPreserveCase.cbcontainerChecked .checkbox { background-position: @chkPreserveCase-hover-icon; }
+.grouped_checkbox_holder .chkSearchBackwards .checkbox { background-position: @chkSearchBackwards-icon; }
+.grouped_checkbox_holder .chkSearchBackwards.cbcontainerChecked .checkbox { background-position: @chkSearchBackwards-hover-icon; }
+
+.grouped_checkbox_holder .chkWrapAround .checkbox { background-position: @chkWrapAround-icon; }
+.grouped_checkbox_holder .chkWrapAround.cbcontainerChecked .checkbox { background-position: @chkWrapAround-hover-icon; }
+
+.grouped_checkbox_holder .chkSearchSelection .checkbox { background-position: @chkSearchSelection-icon; }
+.grouped_checkbox_holder .chkSearchSelection.cbcontainerChecked .checkbox { background-position: @chkSearchSelection-hover-icon; }
+.grouped_checkbox_holder .chkHighlightMatches .checkbox { background-position: @chkHighlightMatches-icon; }
+.grouped_checkbox_holder .chkHighlightMatches.cbcontainerChecked .checkbox { background-position: @chkHighlightMatches-hover-icon; }
+
+.grouped_checkbox_holder .chkConsole .checkbox { background-position: @chkConsole-icon; }
+.grouped_checkbox_holder .chkConsole.cbcontainerChecked .checkbox { background-position: @chkConsole-hover-icon; }
+
+.grouped_checkbox_holder .cbcontainerDisabled .checkbox{
+    opacity : 0.5;
+}
+
+.grouped_checkbox_holder .cbcontainer span {
+    display: none;
+}

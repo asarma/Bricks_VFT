@@ -1,0 +1,24 @@
+<html>
+    <!-- Node.js Context -->
+    <script>
+        var argv = require("nw.gui").App.argv;
+        var win = require("nw.gui").Window.get();
+
+        win.showDevTools();
+       
+        // Show window after 4 seconds if it wasn't shown already
+        setTimeout(function(){ win.show(); }, 4000);
+
+        var idx  = argv.indexOf("-w");
+        var path = idx > -1 ? argv[idx + 1] : null;
+
+        var server  = require("./server");
+        var netutil = require("netutil");
+        
+        netutil.findFreePort(20000, 40000, "localhost", function(err, port) {
+            server.start(port, path, argv, function(){
+                location.href = "http://localhost:" + port + "/static/index.html";
+            });
+        });
+    </script>
+</html>

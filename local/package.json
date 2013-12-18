@@ -1,0 +1,23 @@
+{
+  "name": "Cloud9 IDE",
+  "version": "0.0.1",
+  "main": "index.html",
+  "node-remote": "localhost",
+  "scripts": {
+    
+  },
+  "dependencies": {
+      "netutil": "*"
+  },
+  "window": {
+    "title": "Cloud9 IDE",
+    "toolbar": false,
+    "width": 1000,
+    "height": 700,
+    "show": true,
+    "frame": true
+  },
+  "webkit": {
+      "page-cache": false
+  }
+}

@@ -1,0 +1,80 @@
+.outline.ace_tree{
+    border: none;
+    background: transparent;
+    color: @color;
+}
+.outline.ace_tree .toggler{
+    margin: 4px 0 0 3px;
+}
+.outline.ace_tree .toggler:not(.empty){
+    background-image: url("@{image-path}/@{tree-arrow}");
+}
+
+.outline.ace_tree .ace_tree_cell-layer>div>span{
+    vertical-align: top;
+    font-size: 11px;
+    font-family: Tahoma, Arial;
+    line-height: 10px;
+    .box-sizing(border-box);
+}
+.outline.ace_tree .ace_tree_cell-layer>div>span:first-child{
+    padding : 0 0 0 0;
+}
+
+.outline.ace_tree .tree-row strong{
+    color: @highlight-color;
+    /*font-weight: normal;*/
+}
+.outline.ace_tree .tree-row.selected strong{
+    color : @highlight-selected-color;
+}
+.outline.ace_tree.focus .tree-row.selected .toggler:not(.empty){
+    background-image: url("@{image-path}/@{tree-arrow-focus-selected}");
+}
+
+.outline.ace_tree .tree-row{
+    border-radius: 2px;
+    cursor: pointer;
+}
+.outline.ace_tree .tree-row:hover{
+    background: @selected-hover-background;
+    color: @selected-hover-color;
+}
+.outline.ace_tree .tree-row.selected{
+    background: @selected-background;
+    color: @selected-color;
+}
+.outline.ace_tree.focus .tree-row.selected{
+    background: @selected-focus-background;
+    color: @selected-focus-color;
+}
+
+.outline.ace_tree .tree-row .icon{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 1px -4px 0 0;
+}
+
+.outline.ace_tree .tree-row .icon.event{
+    background: url("@{image-path}/event.png") no-repeat 4px;
+}
+.outline.ace_tree .tree-row .icon.method{
+    background: url("@{image-path}/method.png") no-repeat 4px;
+}
+.outline.ace_tree .tree-row .icon.method2{
+    background: url("@{image-path}/method2.png") no-repeat 4px;
+}
+.outline.ace_tree .tree-row .icon.package{
+    background: url("@{image-path}/package.png") no-repeat 4px;
+}
+.outline.ace_tree .tree-row .icon.property{
+    background: url("@{image-path}/property.png") no-repeat 4px;
+}
+.outline.ace_tree .tree-row .icon.property2{
+    background: url("@{image-path}/property2.png") no-repeat 4px;
+}
+
+.outline.ace_tree .message{
+    font-size : 11px;
+}

@@ -1,0 +1,153 @@
+.filetree.ace_tree {
+    background: transparent;
+    border: none;
+    font: 11px Tahoma, Arial;
+    .font-smoothing(@tree-font-smoothing)
+}
+
+.filetree .tree-row {
+    background : transparent;
+    color : @color;
+    border-radius: 3px;
+    margin: 1px 0px 0px 10px;
+    padding-left: 6px;
+}
+
+.filetree .tree-row.selected {
+    background: @selected-background;
+    border-color: transparent;
+    color : @selected-color;
+}
+
+.filetree .tree-row.projectRoot {
+    margin-right: 20px;
+}
+
+.filetree.ace_tree_focus .tree-row.selected {
+    background: @selected-focus-background;
+    color: @selected-focus-color;
+}
+
+.filetree .message {
+    border : 0;
+    padding : 3px;
+    text-align : center;
+    background : transparent;
+    font-size: 11px;
+}
+
+.filetree .tree-row .toggler{
+    background-image: url("@{image-path}/@{tree-arrow}");
+    margin: 0 1px 0 0;
+}
+
+.filetree.ace_tree_focus .tree-row.selected .toggler{
+    background-image: url("@{image-path}/@{tree-arrow-focus-selected}");
+}
+
+.filetree .tree-row > span {    
+    vertical-align: middle;
+    padding: 0 1px 1px 1px;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.filetree .filetree-icon {
+    width: 16px;
+    height: 16px;
+    padding: 0px;
+    margin: 0px 1px;
+    background-repeat: no-repeat;
+}
+
+.filetree-icon.folder {
+    background-image: url("@{icon-path}/@{tree-folder-icon}.png")
+}
+
+.filetree .loading .filetree-icon,
+.filetree .loading.filetree-icon {
+    background-image : url("@{image-path}/@{tree-spinner}");
+}
+
+.filetree .loading.selected .filetree-icon,
+.filetree .selected .loading.filetree-icon {
+    background-image : url("@{image-path}/@{tree-focus-spinner}");
+}
+        
+.filetree.ace_tree_focus .loading.selected .filetree-icon,
+.filetree.ace_tree_focus .selected .loading.filetree-icon {
+    background-image : url("@{image-path}/@{tree-selected-focus-spinner}");
+}
+
+.filetree .symlink>.filetree-icon:after {
+    content: "";
+    display: block;
+    background: url("@{icon-path}/@{tree-symlink}") no-repeat;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    top: @tree-symlink-y;
+    left: @tree-symlink-x;
+}
+
+.filetree .tree-row.dragAppendUpload .filetree-icon {
+    background-image : url("@{image-path}/@{tree-upload}");
+    background-position: -5px -1px;
+}
+
+.filetreeDragImage.copy:after {
+    content: "+";
+    background: fade(@selected-focus-background, 92%);
+    border: 1px @selected-focus-background solid;
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    color: @selected-focus-color;
+    font-size: 14px;
+    border-radius: 8px;
+    width: 14px;
+    height: 13px;
+    text-align: center;
+    line-height: 13px;
+    font-weight: bold;
+    font-family: monospace;
+    background: -webkit-radial-gradient(5px 5px, circle, rgb(126, 143, 28), rgb(76, 93, 0));
+    background: radial-gradient(5px 5px, circle,  rgb(126, 143, 28), rgb(76, 93, 0));
+    box-shadow: 0px 0px 7px 0px #000;
+}
+.filetreeDragImage .toggler {
+    pointer-events: none;
+}
+
+.ace_tree_DragOver.filetree .tree-row.selected {
+    background: fade(@selected-background, 60%);
+}
+.ace_tree_DragOver.filetree .tree-row.dropTarget {
+    background: @selected-focus-background;
+    box-shadow: 1px 1px fade(@selected-focus-background, 60%) inset;
+    color: @selected-color;
+    border-radius: 3px;
+    .box-sizing(border-box);
+    margin-right: 5px;
+}
+
+.filetree .dragHighlight {
+    position: absolute;
+    border: solid 1px fade(@selected-focus-background, 60%);    
+    border-right: rgba(0, 0, 0, 0);
+    border-top: rgba(0, 0, 0, 0);
+    background: fade(@selected-focus-background, 10%);
+}
+
+.ace_tree-editor {
+    /*
+    height:16px;
+    padding-left:1px;
+    padding-right : 3px;
+    vertical-align : top;
+    margin-top:0px;
+    */
+    color       : @tree-editor-color;
+    background-color: @tree-editor-background;
+    border: 1px solid @tree-editor-border-color;
+}

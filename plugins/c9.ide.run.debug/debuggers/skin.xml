@@ -1,0 +1,176 @@
+<?xml version='1.0'?>
+<a:skin xmlns:a="http://ajax.org/2005/aml">
+    <a:datagrid name="datagrid">
+        <a:style><![CDATA[
+            
+        ]]></a:style>
+    
+        <a:presentation>
+            <a:main head="div[1]" container="div[3]" pointer="div[2]" widthdiff="1" iframe2="true">
+                <div class="blackdg">
+                    <div class="headings">
+    
+                    </div>
+                    <div class="pointer"> </div>
+                    <div class="records"> </div>
+                </div>
+            </a:main>
+    
+            <a:headitem class="." caption="u/text()">
+                <div><u>-<span/></u></div>
+            </a:headitem>
+    
+            <a:rowheaditem class="." caption="text()">
+                <span>-</span>
+            </a:rowheaditem>
+    
+            <a:item class="." container="following-sibling::blockquote">
+                <div class="row"/>
+                <blockquote> </blockquote>
+            </a:item>
+    
+            <a:dragindicator>
+                <div class="dragdg"> </div>
+            </a:dragindicator>
+    
+            <a:cell caption="u"><span><u>-</u></span></a:cell>
+    
+            <a:treecell caption="u" openclose="strong" editoroffset="0"><span class="treecell"><strong> </strong><u>-</u></span></a:treecell>
+    
+            <a:container container=".">
+                <div class="dginfo">-</div>
+            </a:container>
+    
+            <a:loading>
+                <div class="message"></div>
+            </a:loading>
+    
+            <a:empty caption=".">
+                <div class="empty"> </div>
+            </a:empty>
+        </a:presentation>
+    </a:datagrid>
+    <a:list name="breakpoints">
+        <a:style><![CDATA[
+            .listBP{
+                overflow: auto;
+                position: relative;
+                cursor: default;
+                color: @breakpoint-list-color;
+            }
+    
+            .listBP .bpItem{
+                padding    : 2px 2px 2px 22px;
+                position : relative;
+                border-bottom: 1px solid @breakpoint-list-item-border-bottom;
+                border-top: 1px solid @breakpoint-list-item-border-top;
+            }
+            .listBP .bpItem:first-child{
+                border-top-color : transparent;
+            }
+            .listBP .bpItem:last-child{
+                border-bottom-color : transparent;
+            }
+            .listBP .bpItem:hover{
+                color: @breakpoint-list-item-hover-color;
+                background-color: @breakpoint-list-item-hover-background;
+                border-top: 1px solid @breakpoint-list-item-hover-border-top;
+            }
+    
+            .listBP .content{
+                cursor : pointer;
+                font-family : Arial, Tahoma;
+                font-size : 12px;
+                padding : 3px 0 0 0;
+            }
+    
+            .listBP .content div{
+                font-family: Monaco;
+                padding: 3px 0 0 0;
+                font-size: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                color: @breakpoint-list-code-color;
+                text-overflow: ellipsis;
+            }
+            
+            .listBP .bpItem:hover .content div{
+                color : @breakpoint-list-code-hover-color;
+            }
+    
+            .listBP .checkbox {
+                width      : 21px;
+                height     : 19px;
+                background : url("icons/toggle_breakpoints2.png") no-repeat 0 0;
+                display : block;
+                position : absolute;
+                left : 0px;
+                top : 4px;
+            }
+    
+            .listBP .bpItem .checkbox:hover{
+            }
+    
+            .listBP .bpItem .checkbox:active{
+            }
+    
+            .listBP .checked .checkbox:active {
+            }
+    
+            .listBP .checked .checkbox {
+                background : url("icons/toggle_breakpoints1.png") no-repeat 0 0;
+            }
+    
+            .listBP .checked .checkbox:hover{
+            }
+    
+            .listBPDisabled .checkbox {
+            }
+    
+            .listBPDisabled .bpItem {
+                opacity : 0.5
+            }
+    
+            .listBP .bpItem .btnclose {
+                width               : 21px;
+                height              : 19px;
+                position            : absolute;
+                right               : 2px;
+                top                 : 3px;
+                background-image    : url(icons/remove_breakpoints.png);
+                background-repeat   : no-repeat;
+                background-position : 0 0;
+                display             : none;
+            }
+    
+            .listBP .bpItem:hover .btnclose {
+                display: block;
+            }
+    
+            .listBP .bpItem .btnclose:hover {
+                background-position : 0 -19px;
+            }
+    
+            .listBP .bpItem .btnclose:active {
+                background-position : 0 -38px;
+            }
+        ]]></a:style>
+    
+        <a:presentation>
+            <a:main container=".">
+                <div class="listBP">
+                </div>
+            </a:main>
+            <a:item class="." caption="div" icon="div" select="." check="span">
+                <div class="bpItem">
+                    <span class="checkbox"> </span>
+                    <div class="content"> </div>
+                    <strong class="btnclose"> </strong>
+                </div>
+            </a:item>
+            <a:empty caption=".">
+                <div class="message">-</div>
+            </a:empty>
+        </a:presentation>
+    </a:list>
+</a:skin>

@@ -1,0 +1,55 @@
+<a:application xmlns:a="http://ajax.org/2005/aml">
+    <a:appsettings name="ide" debug="false"
+      disable-space             = "true"
+      auto-hide-loading         = "true"
+      allow-select              = "false"
+      allow-blur                = "true"
+      initdelay                 = "false"
+      autoHideLoading           = "false"
+      storage                   = "cookie"
+      baseurl                   = "{apf.host ? apf.host : ''}"
+      requested-with-getparam   = "xhr"
+      csrf-token                = "{'_csrf=' + window.cloud9config._csrf}"/>
+
+    <!-- default model -->
+    <a:model />
+
+    <a:state id="stServerConnected" active="false" />
+    <a:state id="stProcessRunning" active="false" />
+
+    <a:scrollbar
+        id       = "sbShared"
+        skin     = "sbios"
+        top      = "0"
+        right    = "0"
+        bottom   = "0"
+        width    = "7"
+        showonscroll = "true"
+        zindex   = "100000"
+    />
+
+    <a:vsplitbox anchors="0 0 0 0" id="vbMain">
+        <a:bar skin="c9-menu-bar" id="logobar" height="31">
+            <a:bar class="fakehbox aligncenter padding3" id="barTools" height="25" style="padding-top:1px">
+                <a:divider skin="c9-divider-double" class="menudivider" />
+            </a:bar>
+            <a:bar style="float:right;margin-right:-11px;" class="fakehbox aligncenter padding3" id="barExtras">
+                
+            </a:bar>
+        </a:bar>
+
+        <a:hsplitbox id="hboxMain" splitter="true">
+            <a:bar id="colLeft" width="1" visible="false" />
+            <a:hsplitbox splitter="true">
+                <a:vsplitbox id="consoleRow" splitter="true" class="colMain">
+                    <a:vsplitbox id="searchRow">
+                        <a:hsplitbox>
+                            <a:vsplitbox id="colMiddle" padding="3" />
+                        </a:hsplitbox>
+                    </a:vsplitbox>
+                </a:vsplitbox>
+                <a:bar id="colRight" width="1" zindex="100" visible="false" />
+            </a:hsplitbox>
+        </a:hsplitbox>
+    </a:vsplitbox>
+</a:application>

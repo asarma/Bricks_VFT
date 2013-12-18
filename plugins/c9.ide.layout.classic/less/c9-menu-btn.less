@@ -1,0 +1,77 @@
+.c9-menu-btn {
+    height             : 21px;
+    overflow           : visible;
+    cursor             : default;
+    position           : relative;
+    display            : inline-block;
+    
+    font-family   : Tahoma, Arial;
+    font-size     : 12px;
+    line-height   : 14px;
+    color         : @menu-button-color;
+    padding       : 4px 7px 0 7px;
+    text-shadow   : @menu-button-text-shadow;
+}
+
+.c9-menu-btnOver {
+    background-color: @menu-button-hover-background;
+    box-shadow:  1px -1px 0 0 @menu-button-hover-border-color,
+                -1px 0 0 0 @menu-button-hover-border-color,
+                 0 1px 0 0 @menu-button-hover-highlight inset;
+    color: @menu-button-hover-color;
+}
+
+.c9-menu-btnDown {
+    background-color: @menu-button-active-background;
+    box-shadow:  1px 0 0 0 @menu-button-active-border-color inset,
+                 1px 0 0 0 @menu-button-active-border-color,
+                 0 1px 0 0 @menu-button-hover-highlight inset;
+}
+
+/* Why are we using an extra div here??? */
+/*.c9-menu-btnDown .c9-fix {
+    height           : 3px;
+    position         : absolute;
+    display          : none;
+    bottom           : -1px;
+    left             : 1px;
+    right            : 1px;
+    background-color : #1c1c1c;
+    z-index          : 20000101;
+}*/
+.c9-menu-btnDown.submenu{
+    z-index : 100000000;
+}
+
+.hbox > DIV > .c9-menu-btn {
+    height : 25px;
+    margin: 0 !important;
+}
+
+.c9-menu-btnDisabled.c9-menu-btn .c9-label {
+    color: @menu-button-disabled-color;
+}
+
+.c9-menu-btn .icon {
+    background-image  : url("@{image-path}/c9-repeat-x.png");
+    background-repeat : no-repeat;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+}
+
+.c9-menu-btn.preferences .icon {
+    background-position: 50% -364px;
+    display : block;
+}
+
+.c9-menu-btnIcon{
+    padding-left : 24px;
+}
+.c9-menu-btnEmpty{
+    padding-left : 7px;
+}
+    

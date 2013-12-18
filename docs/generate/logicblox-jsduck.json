@@ -1,0 +1,9 @@
+{
+    "--title": "Cloud9 - LogicBlox IDE API Reference",
+    /*"--warnings": ["-nodoc(class,public)", "-all", "+link"],*/
+    "--seo": true,
+    "--output": "output/docs",
+    "--": [
+        "output/parsed"
+    ]
+}

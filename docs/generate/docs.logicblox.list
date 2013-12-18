@@ -1,0 +1,15 @@
+../../plugins/c9.core/ext.js
+../../plugins/logicblox.ide/ide.js
+../../plugins/logicblox.ide/modelbrowser.js
+../../plugins/logicblox.ide/evaluator.js
+../../plugins/logicblox.ide/pivoteditor.js
+../../plugins/logicblox.components/components.js
+../../plugins/logicblox.language.logiql/logiql.js
+../../plugins/logicblox.language.logiql_commands/logiql_commands.js
+../../plugins/logicblox.core/logicblox.js
+../../plugins/logicblox.repl/repl.js
+../../plugins/logicblox.pivot/pivot.js
+../../plugins/logicblox.pivot/urlstate.js
+../../plugins/logicblox.pivot/menu.cell.js
+../../plugins/logicblox.pivot/menu.config.js
+../../plugins/logicblox.pivot/menu.measures.js

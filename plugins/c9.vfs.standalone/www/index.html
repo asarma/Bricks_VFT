@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cloud9 IDE</title>
+    <script>
+        window.requireNode = window.require;
+        window.require = undefined; // null breaks requirejs 2.1.4
+    </script>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+    <script src="require.js"></script>
+    <script src="/configs/require_config.js"></script>
+    <script>
+        //Architect Boot Loader
+        var m = /workspacetype=(\w+)|devel=/.exec(location.search);
+        var packages = m ?
+            m[1] ? "/configs/workspace-" + m[1] + ".js" : "/configs/devel.js"
+            : "/configs/client.js";
+        
+        var start   = Date.now();
+        var install = false;
+        var installer;
+        
+        require([packages, "lib/architect/architect"], function (x, architect) {
+            var plugins = require.plugins;
+            
+            // Switch to install mode
+            if (!plugins[0].installed) {
+                plugins.unshift({
+                    packagePath  : "plugins/c9.ide.installer/installer",
+                    staticPrefix : "plugins/c9.ide.installer",
+                    platform     : plugins[0].platform
+                });
+                install = true;
+            }
+
+            plugins.push({
+                consumes: [],
+                provides: ["auth.bootstrap"],
+                setup: function(options, imports, register) {
+                    register(null, {
+                        "auth.bootstrap": {
+                            login: function(callback) { callback(); }
+                        }
+                    });
+                }
+            });
+            
+            architect.resolveConfig(plugins, function (err, config) {
+                if (err) throw err;
+
+                var app = architect.createApp(config, function(err, app){
+                    if (err) throw err;
+                });
+                
+                app.on("error", function(err){
+                    console.error(err);
+                });
+                
+                app.on("service", function(name, plugin){
+                    if (install) {
+                        if (name == "installer") {
+                            plugin.name = name;
+                            installer   = plugin;
+                        }
+                    }
+                    else if (!plugin.name)
+                        plugin.name = name;
+                });
+                
+                app.on("ready", function(){
+                    // if (app.services.c9.debug)
+                        window.app = app.services;
+
+                    if (install)
+                        installer.start(app.services, function(){
+                            
+                            // Initialize all remaining services
+                            for (var name in app.services) {
+                                if (!app.services[name].name)
+                                    app.services[name].name = name;
+                            }
+                            
+                            done();
+                        });
+                    else
+                        done();
+                });
+                
+                // For Development only
+                function done(){
+                    app.services.c9.ready();
+                    console.warn("Total Load Time: ", Date.now() - start);
+                    
+                    if (location.href.indexOf("files") > -1) {
+                        ["/install.sh", "/package.json", "/README.md", "/server.js"].forEach(function(file){
+                            app.services.tabs.openFile(file,function(){});
+                        });
+                    }
+                    
+                    // app.services.tabs.setState({"type":"hsplitbox","nodes":[{"type":"tab","nodes":[{"type":"page","name":"page0","path":"/install.sh","document":{"value":"curl -L -o v0.2.2.tar.gz https://github.com/chjj/pty.js/archive/v0.2.2.tar.gz\n\nmkdir node_modules/pty.js\ncd node_modules/pty.js\ncp ../../v0.2.2.tar.gz .\ntar -zxvf v0.2.2.tar.gz\nmv pty.js-0.2.2/* .\nrmdir pty.js-0.2.2\nrm v0.2.2.tar.gz\nmake\n\nmkdir ../pty.nw.js\ncd ../pty.nw.js\ncp -a ../pty.js/* .\nmake clean\nnw-gyp configure --target=0.5.0\nnw-gyp build","title":"install.sh","tooltip":"/install.sh","changed":false,"meta":{},"undoManager":{"stack":[],"position":-1},"ace":{"folds":[],"scrolltop":0,"scrollleft":0,"selection":{"start":{"row":0,"column":0},"end":{"row":0,"column":0}},"options":{"tabSize":4,"useSoftTabs":true}}},"editorType":"ace","active":false},{"type":"page","name":"page1","path":"/package.json","document":{"title":"package.json","tooltip":"/package.json","changed":false,"meta":{},"undoManager":{"stack":[],"position":-1}},"editorType":"ace","active":false},{"type":"page","name":"page2","path":"/README.md","document":{"value":"Cloud9 IDE 3.0\n=========\n\nThe new VFS based Cloud9 IDE.\n\n#### Installation ####\n\nInstalling newclient is super simple.\n\n    git clone git@github.com:ajaxorg/newclient.git\n    cd newclient\n    npm install\n\nInstalling the node-webkit based newclient has more steps:\n\n1. Download the OSX node-webkit [https://s3.amazonaws.com/node-webkit/v0.5.1/node-webkit-v0.5.1-osx-ia32.zip](here).\n2. Install nw-gyp (via your favorite package manager)\n3. Run scripts/install-nw-pty.sh\n\n#### Starting the VFS server ####\n\n    node server.js\n\nThe following options can be used:\n\n    -t          Start in Testing Mode\n    -w [path]   Use [path] as workspace root dir. Defaults to root dir of project.\n    -p [port]   Set the port to [port]. Defaults to 8181.\n    -l [host]   Set the host to [host]. Defaults to 0.0.0.0.\n\n#### Starting node webkit version ####\n\nAssuming node-webkit is installed and the nw command is the alias for node-webkit.\n\n    nw local\n\nThere's support for -w to specify the workspace directory and an arbitrary number of args specifying the files to open:\n\n\tnw local -w `pwd` server.js\n\nYou can also open via bin/c9\n\n\tbin/c9 open -w . server.js\n\n#### Load full UI in the browser ####\n\n[http://localhost:8181/static/index.html](http://localhost:8181/static/index.html)\n\nThe plugin configuration for development mode is in configs/client-default.js.\n\nTo start the full UI in development mode use the following url:\n\n[http://localhost:8181/static/index.html?devel=1](http://localhost:8181/static/index.html?devel=1)\n\nThe plugin configuration for development mode is in configs/client-devel.js.\n\n#### Running Tests ####\n\nIn the following example the server name is localhost. Change this to your server name or ip address.\n\nRunning all tests:\n\n[http://localhost:8181/static/test.html](http://localhost:8181/static/test.html)\n\nRunning one specific test (in this case of the ace plugin):\n\n[http://localhost:8181/static/test.html?plugins/c9.ace/ace_test.js](http://localhost:8181/static/test.html?plugins/c9.ace/ace_test.js)\n\nRunning multiple tests:\n\n[http://localhost:8181/static/test.html?plugins/c9.ace/ace_test.js&plugins/c…ns/c9.ace/ace_test.js&plugins/c9.ace.gotoline/gotoline_test.js)\n\nKeeping the UI after the test ran\n\n[http://localhost:8181/static/test.html?plugins/c9.ace/ace_test.js&remain=1]…calhost:8181/static/test.html?plugins/c9.ace/ace_test.js&remain=1)\n\n#### Committing back to SubTree repositories\n\nNewclient uses git subtree as a way to manage the underlying repositories that are managed by us. \nTo commit back to those repositories keep in mind that commits should not cross repository boundaries. \nSplit up your commits per sub repo. The sub repos are all in the node_modules folder.\n\nTo push back to a repo use the following command:\n\n    git subtree push --prefix=node_modules/<name> <name> <branch_name>\n\nFor instance:\n\n    git subtree push --prefix=node_modules/ace ace fix/multi-cursor-weirdness\n\nFor more info see: [http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtre…/blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)\n","title":"README.md","tooltip":"/README.md","changed":false,"meta":{},"undoManager":{"stack":[],"position":-1}},"editorType":"ace","active":false},{"type":"page","name":"page3","path":"/server.js","document":{"value":"var architect = require(\"architect\");\n\n// Quick 'n Dirty args parser\nvar args = {\n    get : function(s, simple){\n        var idx = process.argv.indexOf(s);\n        if (idx == -1) return false;\n        return process.argv[idx + (simple ? 0 : 1)];\n    },\n    getBool : function(s){ return this.get(s, true) ? true : false; },\n    getString : function(s){ return this.get(s) || \"\"; },\n    getInt : function(s){ return +this.get(s) || 0; }\n}\n\n// Parse the args\nvar dir = args.getBool(\"-t\") \n    ? __dirname + \"/plugins/c9.fs/mock\"\n    : (args.getString(\"-w\") || __dirname);\nvar port = args.getInt(\"-p\") || process.env.PORT || 8181;\nvar host = args.getString(\"-l\") || process.env.IP || \"0.0.0.0\";\n\n// Get the architect config\nvar config = require(\"./configs/server-default\")({\n    workspaceDir : dir,\n    workspaceId  : \"devel\",\n    uid          : \"1\",\n    pid          : process.pid,\n    projectName  : \"devel\",\n    port         : port,\n    host         : host,\n    platform     : process.platform,\n    tmux         : process.platform == \"darwin\"\n        ? require(\"path\").resolve(__dirname + \"/deps/tmux/darwin/tmux\")\n        : \"tmux\",\n    heroku       : process.platform == \"darwin\"\n        ? \"/usr/bin/heroku\"\n        : \"/usr/local/bin/heroku\",\n    git          : \"/usr/bin/git\"\n});\n\n// Create the app\narchitect.createApp(architect.resolveConfig(config, __dirname + \"/plugins\"), function(err, app) {\n    if (err) {\n        console.error(err);\n        process.exit(1);\n    }\n    \n    console.log(\"vfs server[\" + process.platform + \"] running at: \" + dir);\n});\n","title":"server.js","tooltip":"/server.js","changed":false,"meta":{},"undoManager":{"stack":[],"position":-1},"ace":{"folds":[],"scrolltop":0,"scrollleft":0,"selection":{"start":{"row":0,"column":0},"end":{"row":0,"column":0}},"options":{"tabSize":4,"useSoftTabs":true}}},"editorType":"ace","active":true}],"skin":"editor_tab","skinset":"default"},{"type":"tab","nodes":[{"type":"page","name":"page4","path":null,"document":{"preview":{"path":"http://www.ajax.org"},"changed":false,"meta":{},"undoManager":{"stack":[],"position":-1}},"editorType":"preview","active":true}],"width":"50%","skin":"editor_tab","skinset":"default"}],"focus":"page4"}, false, function(){});
+                    
+                    if (location.href.indexOf("dashboard") > -1) {
+                        app.services.tabs.open({
+                            editorType: "gaedashboard",
+                            document: {
+                                title: "rubendaniels - Heroku Dashboard",
+                                tooltip: "rubendaniels - Heroku Dashboard",
+                                herokudashboard: {
+                                    app    : "rubendaniels",
+                                    type   : "gae",
+                                    output: {
+                                        id: "rubendaniels-log",
+                                        run: {
+                                            runner: { cmd: ["heroku", "logs", "-t", "-a", "rubendaniels"] },
+                                            options: {}
+                                        }
+                                    },
+                                    ace: {
+                                        value: "test"
+                                    }
+                                }
+                            }
+                        },function(){});
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

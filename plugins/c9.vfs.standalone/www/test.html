@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test Runner</title>
+  <link rel="stylesheet" href="lib/mocha/mocha.css" />
+  <style> HTML { overflow: auto !important } </style>
+</head>
+<body>
+    <div id="mocha"></div>
+
+    <script src="require.js"></script>
+    <script src="/configs/require_config.js"></script>
+    <script src="lib/mocha/mocha.js"></script>
+    <script>
+        /*global mocha*/
+        mocha.setup('bdd');
+        mocha.bail(false);
+        mocha.ignoreLeaks(true);
+        window.onerror=function(msg){ var el=document.getElementById('jserror'); el.innerHTML+="<div class='jserr'>"+msg+"</div>";};
+        
+    </script>
+    <script>//<!--
+    /*global mocha afterEach*/
+    define("amd-loader",[],{});require(["amd-loader"]);
+    // require.config({paths: {chai: "lib/chai/chai"}});
+    
+    require(["text!/test/all.json"], function(tests) {
+        tests = JSON.parse(tests);
+        
+        var running = false;
+        var count = 0, total = 0, lastDone;
+        
+        onload = function(){
+            //if (++count == files.length)
+            count = 0;
+            total = countTotal();
+            
+            if (!running)
+                mocha.run();
+            else if (lastDone) {
+                lastDone();
+            }
+            running = true;
+        };
+        onload.remain = location.href.indexOf("&remain=1") > -1;
+    
+        var allFiles = tests.all.filter(function(p) { 
+            return !tests.blacklist[p];
+        });
+        
+        var files = allFiles;
+
+        if (location.href.indexOf("?") > -1) 
+            files = location.href.split("?").pop().split("&").filter(function(path){
+                return path && path.indexOf("=") == -1;
+            });
+        else
+            mocha.bail(false);
+        
+        function formatTestList(all) {
+            return all.map(function(p){
+                return "<a href='" + p.replace(/^!?/, "?") + "&remain=1" + "'>" + p + "</a>";
+            }).join("<br>");
+        }
+        
+        if (!files.length && location.href.slice(-1) == "?") {
+            var disabled = Object.keys(tests.blacklist).sort();
+            var enabled = allFiles.concat().sort();
+            var runAll = "<span style='font-size: 14px;'><a href='/static/test.html'>run all</a></span>";
+            var initErr = document.getElementById('jserror').innerHTML;
+            document.body.innerHTML = ""
+                + "<h1>Enabled tests" + runAll + "</h1>"
+                + "<div style='font-size: 14px;'>" + formatTestList(enabled) + "</div>"
+                + "<h1>Blacklisted tests</h1>"
+                + "<div style='font-size: 14px;'>" + formatTestList(disabled) + "</div>"
+                + "<iframe id='quickview' style='position:fixed;top:0;right:0;'></iframe>"
+                + "<div id='jserror' width='100%' height='20px' style='font: 10px \"courier new\"; color: red; display: none;'></div>";
+
+            document.getElementById('jserror').innerHTML = initErr;
+            document.body.onclick = function(e) {
+                var href = e.target.getAttribute("href") || "";
+                var quickview = document.getElementById("quickview");
+                quickview.style.width = window.innerWidth - 450 + "px";
+                quickview.style.height = window.innerHeight  + "px";
+                if (href && e.button === 0 && href.indexOf("?") !== -1) {
+                    quickview.src = href;
+                    e.preventDefault();
+                }
+            };
+        }
+        
+        var suites = mocha.suite.suites;
+        function countTotal(suite){
+            if (!suite)
+                suite = suites[suites.length - 1];
+            return suite.total();
+            
+            var total = suite.tests.length;
+            suite.suites.forEach(function(suite){
+                total += countTotal(suite);
+            });
+            return total;
+        }
+
+        mocha.timeout(10000);
+        
+        afterEach(function(done){ 
+            count++;
+            
+            if (count >= total && files.length) {
+                lastDone = done;
+                loadNext();
+            }
+            else done();
+        });
+        
+        function loadNext() {
+            var file = files.shift();
+            if (!file) return;
+            console.warn(file);
+            require([file], function(){ 
+                
+            }, function() {
+                console.error("Failed to load", file);
+                loadNext();
+            });
+        }
+        
+        // after(function(){
+        //     if (typeof bar != "undefined")
+        //         bar.destroy(true, true);
+        // })
+        
+        require(["lib/chai/chai", "text!plugins/c9.ide.layout.classic/skins.xml", "test.js"], function(){
+            loadNext();
+        });
+    });
+    //--></script>
+    <div id='jserror' width='100%' height='20px' style='font: 10px \"courier new\"; color: red; display: none;'></div>
+</body>
+</html>

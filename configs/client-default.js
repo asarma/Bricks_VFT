@@ -1,0 +1,416 @@
+var Path = require("path");
+var assert = require("assert");
+
+module.exports = function(options) {
+    assert(options.staticPrefix, "Option 'staticPrefix' must be set");
+    assert(options.workspaceDir, "Option 'workspaceDir' must be set");
+    assert(options.workspaceId, "Option 'workspaceId' must be set");
+    assert(options.workspaceName, "Option 'workspaceName' must be set");
+    assert(options.home, "Option 'home' must be set");
+    assert(options.platform, "Option 'platform' must be set");
+
+    var workspaceDir = options.workspaceDir;
+    var debug        = options.debug !== undefined ? options.debug : true;
+    var staticPrefix = options.staticPrefix;
+    
+    var runners  = options.runners || {};
+    var builders = options.builders || {};
+    
+    return [
+        // C9
+        {
+            packagePath: "plugins/c9.core/c9",
+            
+            startdate: new Date(),
+            version: options.manifest.version + "(" + options.manifest.revision + ")",
+            debug: debug,
+            workspaceId: options.workspaceId,
+            name: options.workspaceName,
+            readonly: false,
+            staticUrl: staticPrefix,
+            hosted: !options.local && !options.dev,
+            hostname: options.appHostname,
+            local: options.local,
+            env: options.env || "devel",
+            home: options.home,
+            platform: options.platform,
+            installed: options.installed,
+            projectName: options.projectName || "Project",
+            configName: options.configName
+        },
+        {
+            packagePath : "plugins/c9.core/settings",
+            settings : ""
+        },
+        "plugins/c9.core/ext",
+        "plugins/c9.core/http",
+        "plugins/c9.core/util",
+        
+        // Logging, Metrics, Monitoring, Testing
+        // {
+        //     packagePath: "plugins/c9.ide.log/log",
+        //     metricHost: "23.23.88.95",
+        //     application: "newclient"
+        // },
+        // "plugins/c9.ide.log/duration",
+        
+        // VFS
+        "plugins/c9.vfs.client/vfs.ping",
+        {
+            packagePath: "plugins/c9.vfs.client/vfs_client",
+            debug: debug
+        },
+        {
+            packagePath: "plugins/c9.vfs.client/endpoint",
+            datacenter: options.datacenter,
+            projectId: options.projectId,
+            servers: options.vfsServers
+        },
+        {
+            packagePath: "plugins/c9.ide.auth/auth",
+            accessToken: options.accessToken || ""
+        },
+        
+        // Editors
+        "plugins/c9.ide.editors/document",
+        {
+            packagePath: "plugins/c9.ide.editors/editors",
+            defaultEditor: "ace"
+        },
+        "plugins/c9.ide.editors/editor",
+        "plugins/c9.ide.editors/imgview",
+        "plugins/c9.ide.editors/urlview",
+        "plugins/c9.ide.editors/tab",
+        {
+            packagePath: "plugins/c9.ide.editors/tabmanager",
+            loadFilesAtInit: false
+        },
+        "plugins/c9.ide.editors/metadata",
+        "plugins/c9.ide.editors/pane",
+        "plugins/c9.ide.editors/undomanager",
+        
+        "plugins/c9.ide.newresource/newresource",
+        "plugins/c9.ide.undo/undo",
+        "plugins/c9.ide.closeconfirmation/closeconfirmation",
+        {
+            packagePath: "plugins/c9.ide.openfiles/openfiles",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        
+        // Ace && Commands
+        "plugins/c9.ide.keys/commands",
+        "plugins/c9.ide.keys/editor",
+        {
+            packagePath : "plugins/c9.ide.ace/ace",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        "plugins/c9.ide.ace.stripws/stripws",
+        "plugins/c9.ide.ace.repl/editor",
+        {
+            packagePath  : "plugins/c9.ide.ace.gotoline/gotoline",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.ace.gotoline"
+        },
+        {
+            packagePath  : "plugins/c9.ide.ace.statusbar/statusbar",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        
+        // Find
+        {
+            packagePath  : "plugins/c9.ide.find/find",
+            basePath     : workspaceDir
+        },
+        {
+            packagePath : "plugins/c9.ide.find/find.nak",
+            ignore      : "",
+            basePath    : workspaceDir,
+            nak         : options.nakBin || (options.platform == "win32" ?
+                "nak.cmd" : Path.join(options.home, "/.c9/node_modules/nak/bin/nak"))
+        },
+        {
+            packagePath  : "plugins/c9.ide.find.infiles/findinfiles",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.find.infiles"
+        },
+        {
+            packagePath : "plugins/c9.ide.find.replace/findreplace",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.find.replace"
+        },
+        
+        // UI
+        {
+            packagePath  : "plugins/c9.ide.ui/ui",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.ui"
+        },
+        "plugins/c9.ide.ui/anims",
+        "plugins/c9.ide.ui/tooltip",
+        "plugins/c9.ide.ui/menus",
+        "plugins/c9.ide.ui/forms",
+        "plugins/c9.ide.ui/lib_apf",
+        
+        "plugins/c9.ide.dialog/dialog",
+        "plugins/c9.ide.dialog.common/alert",
+        "plugins/c9.ide.dialog.common/confirm",
+        "plugins/c9.ide.dialog.common/filechange",
+        "plugins/c9.ide.dialog.common/fileoverwrite",
+        "plugins/c9.ide.dialog.common/fileremove",
+        "plugins/c9.ide.dialog.common/question",
+        "plugins/c9.ide.dialog.file/filesave",
+        
+        // VFS
+        "plugins/c9.fs/proc",
+        "plugins/c9.fs/proc.apigen",
+        "plugins/c9.fs/net",
+        {
+            packagePath : "plugins/c9.fs/fs",
+            baseProc    : workspaceDir
+        },
+        "plugins/c9.fs/fs.errors",
+        "plugins/c9.fs/fs.cache.xml",
+        
+        // Watcher
+        "plugins/c9.ide.threewaymerge/threewaymerge",
+        "plugins/c9.ide.watcher/watcher",
+        "plugins/c9.ide.watcher/gui",
+        
+        // Language
+        {
+            packagePath: "plugins/c9.ide.language/language",
+            workspaceDir: workspaceDir
+        },
+        "plugins/c9.ide.language/keyhandler",
+        "plugins/c9.ide.language/complete",
+        "plugins/c9.ide.language/marker",
+        "plugins/c9.ide.language/refactor",
+        "plugins/c9.ide.language/tooltip",
+        "plugins/c9.ide.language/jumptodef",
+        "plugins/c9.ide.language/worker_util_helper",
+        "plugins/c9.ide.language.generic/generic",
+        "plugins/c9.ide.language.javascript/javascript",
+        "plugins/c9.ide.language.javascript.immediate/immediate",
+        "plugins/c9.ide.language.javascript.infer/jsinfer",
+        "plugins/c9.ide.language.jsonalyzer/jsonalyzer",
+
+        // Run
+        {
+            packagePath : "plugins/c9.ide.run/run",
+            base        : workspaceDir,
+            tmux        : options.tmux,
+            runners     : runners
+        },
+        {
+            packagePath : "plugins/c9.ide.run/gui",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        {
+            packagePath : "plugins/c9.ide.run.build/build",
+            base        : workspaceDir,
+            builders    : builders
+        },
+        {
+            packagePath : "plugins/c9.ide.run.build/gui"
+        },
+        "plugins/c9.ide.run.debug/debuggers/sourcemap",
+        {
+            packagePath : "plugins/c9.ide.run.debug/debuggers/debugger",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        {
+            packagePath: "plugins/c9.ide.run.debug/debuggers/v8/v8debugger",
+            basePath : workspaceDir
+        },
+        "plugins/c9.ide.run.debug/breakpoints",
+        "plugins/c9.ide.run.debug/debugpanel",
+        "plugins/c9.ide.run.debug/callstack",
+        {
+            packagePath: "plugins/c9.ide.immediate/immediate",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        "plugins/c9.ide.immediate/evaluator",
+        "plugins/c9.ide.immediate/evaluators/browserjs",
+        "plugins/c9.ide.immediate/evaluators/debugnode",
+        "plugins/c9.ide.run.debug/variables",
+        "plugins/c9.ide.run.debug/watches",
+        "plugins/c9.ide.run.debug/liveinspect",
+        //"plugins/c9.ide.run.debug/quickwatch",
+        
+        // Console
+        {
+            packagePath : "plugins/c9.ide.terminal/terminal",
+            tmux : options.tmux,
+            root : workspaceDir,
+            tmpdir : options.tmpdir,
+            shell : options.shell || ""
+        },
+        {
+            packagePath: "plugins/c9.ide.run/output",
+            tmux: options.tmux
+        },
+        "plugins/c9.ide.console/console",
+        
+        // Layout & Panels
+        {
+            packagePath: "plugins/c9.ide.layout.classic/layout",
+            staticPrefix: staticPrefix + "/plugins/c9.ide.layout.classic",
+            dashboardUrl: options.dashboardUrl,
+            cdn: options.useCdn
+        },
+        {
+            packagePath: "plugins/c9.ide.layout.classic/preload",
+            themePrefix: options.themePrefix
+        },
+        {
+            packagePath: "plugins/c9.ide.tree/tree",
+            staticPrefix: staticPrefix + "/plugins/c9.ide.layout.classic"
+        },
+        "plugins/c9.ide.download/download",
+        "plugins/c9.ide.upload/dragdrop",
+        {
+            packagePath: "plugins/c9.ide.upload/upload",
+            staticPrefix: staticPrefix + "/plugins/c9.ide.upload"
+        },
+        {
+            packagePath: "plugins/c9.ide.upload/upload_manager",
+            workerPrefix: "plugins/c9.ide.upload"
+        },
+        {
+            packagePath: "plugins/c9.ide.upload/upload_progress",
+            staticPrefix: staticPrefix + "/plugins/c9.ide.layout.classic"
+        },        
+        "plugins/c9.ide.dashboard/dashboard",
+        {
+            packagePath: "plugins/c9.ide.navigate/navigate"
+        },
+        {
+            packagePath : "plugins/c9.ide.language/outline",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.language"
+        },
+        {
+            packagePath : "plugins/c9.ide.panels/panels",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.layout.classic",
+            defaultActiveLeft : "tree"
+        },
+        "plugins/c9.ide.panels/panel",
+        "plugins/c9.ide.panels/area",
+        
+        // // Deploy
+        // {
+        //     packagePath : "plugins/c9.ide.deploy/deploy",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.deploy"
+        // },
+        // "plugins/c9.ide.deploy/instance",
+        // "plugins/c9.ide.deploy/target",
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.mongolab/mongolab",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.deploy.mongolab/images"
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.heroku/heroku",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.deploy.heroku/images"
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.heroku/libheroku",
+        //     basePath : workspaceDir,
+        //     heroku : options.heroku,
+        //     git : options.git
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.openshift/openshift",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.deploy.openshift/images",
+        //     rhc : options.rhc
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.openshift/libopenshift",
+        //     basePath : workspaceDir,
+        //     git : options.git,
+        //     rhc : options.rhc
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.gae/gae",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.deploy.gae/images"
+        // },
+        // {
+        //     packagePath : "plugins/c9.ide.deploy.gae/libgae",
+        //     basePath : workspaceDir,
+        //     git : options.git,
+        // },
+        
+        // Previewer
+        {
+            packagePath : "plugins/c9.ide.preview/preview",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.preview",
+            defaultPreviewer : "preview.browser",
+            previewUrl : options.previewUrl
+        },
+        "plugins/c9.ide.preview/previewer",
+        "plugins/c9.ide.preview/previewers/browser",
+        "plugins/c9.ide.preview/previewers/raw",
+        {
+            packagePath: "plugins/c9.ide.preview/previewers/markdown",
+            htmlurl: staticPrefix + "/plugins/c9.ide.preview/previewers/markdown.html",
+        },
+        {
+            packagePath : "plugins/saucelabs.preview/preview",
+            staticPrefix : staticPrefix + "/plugins/saucelabs.preview"
+        },
+        
+        // Other
+        {
+            packagePath: "plugins/c9.ide.info/info",
+            user: {
+                id: options.user.uid,
+                name: options.user.name,
+                fullname: options.user.fullname,
+                email: options.user.email,
+                pubkey: options.user.pubkey
+            },
+            project: {
+                id: options.project.pid,
+                name: options.project.name,
+                contents: options.project.contents,
+                descr: options.project.descr
+            }
+        },
+            
+        {
+            packagePath: "plugins/c9.cli.bridge/bridge",
+            port: 17123
+        },
+        {
+            packagePath : "plugins/c9.cli.bridge/bridge_commands",
+            basePath    : workspaceDir
+        },
+        // {
+        //     packagePath : "plugins/c9.ide.help/help",
+        //     staticPrefix : staticPrefix + "/plugins/c9.ide.help"
+        // },
+        {
+            packagePath : "plugins/c9.ide.feedback/feedback",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.feedback",
+            baseurl: options.ideBaseUrl,
+            userSnapApiKey: options.feedback.userSnapApiKey
+        },
+        "plugins/c9.ide.save/save",
+        "plugins/c9.ide.recentfiles/recentfiles",
+        "plugins/c9.ide.save/autosave",
+        "plugins/c9.ide.clipboard/clipboard",
+        "plugins/c9.ide.clipboard/html5",
+        "plugins/c9.ide.behaviors/tabs",
+        {
+            packagePath: "plugins/c9.ide.behaviors/dashboard",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.behaviors"
+        },
+        {
+            packagePath: "plugins/c9.ide.behaviors/page",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.behaviors"
+        },
+        "plugins/c9.ide.browsersupport/browsersupport",
+        {
+            packagePath : "plugins/c9.ide.preferences/preferences",
+            staticPrefix : staticPrefix + "/plugins/c9.ide.preferences"
+        },
+        "plugins/c9.ide.preferences/preferencepanel",
+        "plugins/c9.ide.preferences/general",
+        "plugins/c9.ide.preferences/project"
+    ];
+
+};

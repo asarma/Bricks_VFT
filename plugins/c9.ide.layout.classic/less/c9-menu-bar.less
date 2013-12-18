@@ -1,0 +1,248 @@
+.c9-menu-bar {
+    position      : relative;
+    overflow      : visible;
+    background    : url("@{image-path}/c9-repeat-x.png") repeat-x 0 0 #49a8fa;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.c9-menu-bar .c9-mbar-bcont {
+    position   : relative;
+    overflow   : visible;
+}
+
+.c9-menu-bar .c9-mbar-bcont .c9-offline {
+    width:42px;
+    height:21px;
+    position:absolute;
+    background:url("@{image-path}/offline.png") no-repeat 0 0;
+    top:24px;
+    right: 3px;
+    display: none;
+    z-index: 100000;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.c9-menu-bar.offline .c9-mbar-bcont .c9-offline {
+    display:block;
+}
+
+.c9-menu-bar .c9-mbar-bcont .c9-local {
+    width:42px;
+    height:21px;
+    position:absolute;
+    background:url("@{image-path}/local_green.png") no-repeat 0 0;
+    top:40px;
+    right: 3px;
+    display: none;
+    z-index: 100000;
+}
+
+.c9-menu-bar.offline.local .c9-mbar-bcont .c9-local {
+    display:block;
+}
+
+.c9-mbar-logo{
+    padding-top: 4px;
+}
+
+.c9-menu-bar .c9-mbar-logo .c9-mbar-bcont .c9-offlineInfo {
+    width: 158px;
+    height: auto;
+    line-height : 19px;
+    position: absolute;
+    top: 42px;
+    right: 3px;
+    z-index: 50000;
+    min-width: 0px;
+    min-height: 0px;
+    max-width: 9998px;
+    max-height: 9992px;
+    display: none;
+    opacity: 1;
+    padding: 5px 7px 7px 9px;
+    color: #BDBDBD;
+}
+
+.c9-menu-bar .c9-mbar-logo .c9-mbar-bcont .c9-offlineInfo .offlineInfoWarn{
+    color: #91c478;
+}
+
+.c9-menu-bar .c9-mbar-cont {
+    position: relative;
+    overflow: hidden;
+    padding: 0 74px 0 22px;
+    margin: 0;
+    height: 25px;
+    
+    background: @menu-bar-background;
+
+    box-shadow: 0 1px 0 0 @menu-bar-inner-border-top inset;
+    border-bottom: 1px solid @menu-bar-border-bottom;
+    border-top: 1px solid @menu-bar-border-top;
+}
+
+.c9-menu-bar .c9-mbar-cont>div{
+    display : inline-block;
+    vertical-align : top;
+}
+
+.c9-menu-bar .c9-mbar-cont .c9-divider-double,
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize {
+    border-right: 1px solid @menu-bar-divider-highlight-dark;
+    box-shadow: 1px 0 0 0 @border-highlight;
+}
+
+.c9-menu-bar .c9-mbar-cont .c9-divider-double {
+    border-left-width: 0;
+    height: 16px;
+    top: 1px;
+}
+
+.c9-menu-bar .c9-mbar-cont .c9-divider-double div {
+    border: 0 !important;
+}
+
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize {
+    cursor: pointer;
+    height: 25px;
+    left: 0;
+    position : absolute;
+    top: 0px;
+    width: 20px;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize:before {
+    content: "";
+    display: block;
+    border: 10px solid red;
+    border-color: transparent transparent @menu-button-minimized-highlight transparent;
+    border-width: 5px 5px;
+    width: 0px;
+    margin: 5px 0 0 5px;
+    z-index: 0;
+    position: relative;
+    box-shadow: 0px 1px @menu-button-minimized-shadow;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize:after {
+    content: "";
+    display: block;
+    border: 10px solid red;
+    border-color: transparent transparent @menu-button-minimized-foreground transparent;
+    border-width: 4px 4px;
+    width: 0px;
+    margin: 7px 0 0 6px;
+    box-shadow: 0px 1px @menu-button-minimized-shadow;
+    position: relative;
+    left: 0px;
+    top: -15px;
+}
+
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize:hover:before {
+    border-color: transparent transparent @menu-button-minimized-hover-highlight transparent;
+    box-shadow: 0px 1px @menu-button-minimized-hover-shadow;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-mbar-minimize:hover:after {
+    border-color: transparent transparent @menu-button-minimized-hover-foreground transparent;
+    box-shadow: 0px 1px @menu-button-minimized-hover-shadow;
+}
+
+.c9-menu-bar .c9-mbar-bcont .c9-simple-btnDisabled.c9-mbar-minimize:hover {
+    background-position: 0 -70px;
+    cursor: default;
+}
+.c9-mbar-round {
+    background : url("@{image-path}/c9-no-repeat.png") no-repeat 0 0;
+    height: 37px;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 74px;
+    z-index: 999;
+}
+.c9-mbar-round .mainlogo {
+    background: url("@{image-path}/c9-no-repeat.png") no-repeat 0 -44px;
+    display: block;
+    height: 26px;
+    left: 33px;
+    pointer-events: all;
+    position: absolute;
+    text-indent: 100%;
+    top: 4px;
+    width: 37px;
+    outline: none;
+}
+.c9-mbar-round .mainlogo.update{
+    background-position : -96px -44px;
+}
+       .updateAvailable .c9-mbar-round .mainlogo {
+   background: url("@{image-path}/c9-no-repeat.png") no-repeat -96px -44px;
+   cursor: pointer;
+       }
+
+.not-loggedin .c9-menu-bar .c9-mbar-bcont .c9-mbar-round {
+  top: 55px;
+       }
+
+.readonly .c9-menu-bar .c9-mbar-bcont .c9-mbar-round {
+   top: 35px;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-activity {
+    background : url("@{image-path}/c9-no-repeat.png") no-repeat -84px 0;
+    height: 10px;
+    left: 24px;
+    pointer-events: all;
+    position: absolute;
+    top: 4px;
+    width: 10px;
+    display : none;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-activity .light{
+    background : url("@{image-path}/c9-no-repeat.png") no-repeat -102px -19px; /* nothing */
+    height: 10px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 10px;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-activity.saving .light{
+    -webkit-animation: saving .4s linear 0 infinite;
+       -moz-animation: saving .4s linear 0 infinite;
+            animation: saving .4s linear 0 infinite;
+
+    background-position: -102px 0px !important;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-activity.saved  .light{
+    background-position: -102px -19px !important;
+}
+.c9-menu-bar .c9-mbar-bcont .c9-activity.error .light{
+    background-position: -84px -19px !important;
+}
+
+/* MINIMIZED */
+
+ .c9-menu-bar.minimized .c9-mbar-cont,
+ .c9-menu-bar.minimized .c9-mbar-bcont .c9-mbar-minimize {
+    background-color: @menu-bar-minimized-background;
+    background-image: url("@{image-path}/c9-repeat-x.png");
+    background-repeat: no-repeat;
+    background-position: 50% -13px;
+    cursor: pointer;
+    height: 6px;
+ }
+ .c9-menu-bar.minimized .c9-mbar-cont:hover,
+ .c9-menu-bar.minimized .c9-mbar-bcont .c9-mbar-minimize:hover {
+    background-position: 50% -21px;
+    .box-shadow(~"1px 0 0 0 @{menu-bar-minimized-hover-start}, 0 6px 0 0 @{menu-bar-minimized-hover-stop} inset");
+ }
+ .c9-menu-bar.minimized .c9-mbar-cont * {
+    display: none;
+ }
+
+ .c9-menu-bar.minimized .c9-mbar-bcont .c9-mbar-minimize {
+    top: 1px;
+ }
+    

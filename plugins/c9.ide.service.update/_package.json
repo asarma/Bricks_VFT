@@ -1,0 +1,10 @@
+{
+    "name": "vfs.server",
+    "version": "0.0.1",
+    "private": true,
+    
+    "main": "./vfs.server.js",
+    "Plugin": {
+        "consumes": ["static", "connect", "smith.transport.server"]
+    }
+}

@@ -1,0 +1,139 @@
+{
+  "name": "c9",
+  "description": "New Cloud9 Client",
+  "version": "3.0.1",
+  "author": "Ajax.org B.V. <info@ajax.org>",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Ruben Daniels",
+      "email": "ruben@c9.io"
+    },
+    {
+      "name": "Harutyun Amirjanyan",
+      "email": "harutyun@c9.io"
+    },
+    {
+      "name": "Mostafa Ewada",
+      "email": "mostafa@c9.io"
+    },
+    {
+      "name": "Lennart Kats",
+      "email": "lennart@c9.io"
+    },
+    {
+      "name": "Ivar Pruijn",
+      "email": "ivar@c9.io"
+    },
+    {
+      "name": "Fabian Jakobs",
+      "email": "fabian@c9.io"
+    },
+    {
+      "name": "Bas de Wachter",
+      "email": "bas@c9.io"
+    }
+  ],
+  "main": "bin/c9",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ajaxorg/newclient2.git"
+  },
+  "dependencies": {
+    "amd-loader": "~0.0.5",
+    "base64id": "~0.1.0",
+    "cookie": "~0.1.0",
+    "cookie-signature": "~1.0.1",
+    "debug": "~0.7.0",
+    "engine.io": "~0.6.3",
+    "engine.io-client": "~0.6.3",
+    "mime": "~1.2.9",
+    "msgpack-js": "~0.1.1",
+    "msgpack-js-browser": "~0.1.4",
+    "netutil": "~0.0.1",
+    "optimist": "~0.6.0",
+    "request": "~2.12.0",
+    "requirejs": "~2.1.4",
+    "simple-mime": "~0.0.8",
+    "source-map": "~0.1.9",
+    "formidable": "~1.0.14",
+    "node-uuid": "~1.4.0",
+    "markdown": "~0.4.0",
+    "less": "~1.5.1",
+    "nopt": "~1",
+    "node-proxy": "~0.6.0",
+    "xmlhttprequest": "~1.6.0",
+    "rusha": "~0.7.0",
+    "passport": "~0.1.16",
+    "passport-github": "~0.1.4",
+    "passport-bitbucket": "~0.1.2",
+    "passport-local": "~0.1.6",
+    "passport-oauth": "~0.1.15",
+    "passport-http": "~0.2.1",
+    "passport-oauth2-client-password": "~0.1.0",
+    "passport-http-bearer": "~0.2.1",
+    "send": "~0.1.4",
+    "http-error": "~0.0.1",
+    "async": "~0.2.7",
+    "email-validator": "~0.1.2",
+    "oauth2orize": "~0.1.0",
+    "mongoose": "~3.6.9",
+    "ejs": "~0.8.3",
+    "redis": "~0.8.3",
+    "connect-redis": "~1.4.5",
+    "restler": "2.0.1",
+    "tmp": "~0.0.20",
+    
+    "connect": "~2.8.0",
+    "connect-flash": "~0.1.0",
+    "connect-ensure-login": "~0.1.0",
+    "pty.js": "~0.2.3",
+    "minimatch": "0.2.11",
+    "ws": "0.4.25",
+    
+    
+    
+    "architect": "0.1.11",
+    "architect-build": "0.1.0",
+    "ace": "1.0.0",
+    "ace_tree": "0.1.0",
+    
+    "connect-architect": "0.2.0",
+    "frontdoor": "0.0.1",
+    "vfs-nodefs-adapter" : "0.3.0",
+    "vfs-child": "0.3.0",
+    "vfs-http-adapter": "0.2.3",
+    "vfs-lint": "0.0.1",
+    "vfs-ssh": "0.3.7",
+    "kaefer": "0.1.0",
+    "c9": "0.1.0",
+    "treehugger": "0.0.1"
+  },
+  "scripts-disabled": {
+    "build": "make worker",
+    "build-packed": "make package",
+    "postinstall": "sh ./scripts/install.sh"
+  },
+  "devDependencies": {
+    "chai": "~1.5.0",
+    "mocha": "~1.8.1",
+    "asyncjs": "0.0.x",
+    "sinon": "~1.7.3",
+    "jsdom": "0.2.x",
+    "dryice": "0.4.10",
+    "through": "2.2.0",
+    "mkdirp": "0.3.5",
+    "uglify-js": "2.2.5",
+    "isbinaryfile": "",
+    "sigmund": "1.0.0",
+    "lru-cache": "2.2.2",
+    "simplefunc": "0.0.2",
+    "stack": "0.1.0",
+    "nak": "0.2.16",
+    "wd": "0.2.0",
+    "path": "0.4.9"
+  },
+  "optionalDependencies": {},
+  "licenses": []
+}
+

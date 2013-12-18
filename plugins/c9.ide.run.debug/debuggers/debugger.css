@@ -1,0 +1,139 @@
+.has_apf .blackdg, .listBP {
+    background: @datagrid-background;
+}
+
+.debugcontainer .scroller{
+    position : absolute;
+    overflow-y : auto;
+    overflow-x : hidden;
+    top : 26px;
+    left : 0;
+    right : 0;
+    bottom : 24px;
+}
+
+.panelsbuttonDown.debugger, .panelsbuttonDown.debugger:hover{
+    /*border-bottom: 1px solid rgb(27, 27, 27);*/
+    box-shadow: 1px -1px @border-highlight inset, 1px 0 @border-highlight;
+    padding-bottom: 7px;
+}
+
+.pause0 .icon{
+    background-position : 0 0 !important;
+}
+
+.pause1 .icon{
+    background-position : 0 -19px !important;
+}
+
+.pause2 .icon{
+    background-position : 0 -38px !important;
+}
+
+.blackdg .newwatch strong{
+    display : none;
+}
+.blackdg .newwatch{
+    color : @datagrid-watch-new;
+}
+.blackdg.ace_tree_focus .newwatch.selected{
+    color : @datagrid-watch-new-focus !important;
+}
+.blackdg .watcherror{
+    color : @datagrid-watch-error;
+}
+
+
+/** condition_dialog **/
+.condition_dialog{
+    border-radius: 3px;
+    
+    background: -moz-linear-gradient(top,  rgba(103, 126, 10, 1) 0%, rgba(71, 87, 9, 1) 100%); /* FF3.6+ */
+    background: -webkit-linear-gradient(top,  rgba(103, 126, 10, 1) 0%, rgba(71, 87, 9, 1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -ms-linear-gradient(top,  rgba(103, 126, 10, 1) 0%, rgba(71, 87, 9, 1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(103, 126, 10, 1) 0%, rgba(71, 87, 9, 1) 100%); /* W3C */
+    
+    padding : 5px;
+    font-family : Arial;
+    font-size : 12px;
+    width : 230px;
+    
+    position: absolute;
+    display : none;
+    z-index : 1000000;
+    box-shadow: 2px 2px 13px rgba(0,0,0,0.8), inset -1px -1px rgba(255,255,255,0.1), inset 1px 1px rgba(255,255,255,0.2);
+    -webkit-font-smoothing: antialiased;
+}
+
+.condition_dialog>.message{
+    color : #E6E6E6;
+    margin : 0 0 5px 1px;
+}
+
+.condition_dialog .ace_content div{
+    color : #2C2C2C;
+}
+
+.condition_dialog>.input{
+    border: 0;
+    padding: 4px 3px 2px 7px;
+    outline: none;
+    box-shadow: inset 1px 2px 3px 0 rgba(0,0,0,.3);
+    color: #FFF;
+    border-radius: 3px;
+    background: white;
+    -webkit-font-smoothing: auto;
+    font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
+    height : 18px;
+}
+
+.condition_dialog>.input .simplebox{
+    height : 20px !important;
+}
+
+.condition_dialog>.arrow{
+    border: 7px inset blue;
+    display: block;
+    border-color: transparent transparent rgba(103, 126, 10, 1) transparent;
+    position: absolute;
+    left: 3px;
+    top: -13px;
+}
+
+/** liveinspect **/
+
+.liveinspect {
+    box-shadow: @liveinspect-shadow;
+    z-index : 100000;
+    background-color: @liveinspect-background;
+    position: absolute;
+    cursor: auto;
+    padding: 1px 6px 1px 1px;
+    font-size: 11px;
+    font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
+    border: 1px solid @liveinspect-border-color;
+    margin : 0 0 0 -1px;
+    max-height : 150px;
+    overflow : auto;
+    max-width : 800px;
+    margin-right : 50px;
+    border-radius: 3px;
+}
+
+.liveinspect.immediate .null{
+    color : @liveinspect-null;
+}
+
+.liveinspect.dark{
+    box-shadow: @liveinspect-dark-shadow;
+    background-color: @liveinspect-dark-background;
+    border: 1px solid @liveinspect-dark-border-color;
+}
+
+.liveinspect.immediate.dark .null{
+    color : @liveinspect-dark-null;
+}
+
+.liveinspect .return, .liveinspect.dark .ace_dark .return{
+    border-bottom : 0;
+}
